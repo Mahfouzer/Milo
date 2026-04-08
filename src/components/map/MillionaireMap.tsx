@@ -232,17 +232,17 @@ export function MillionaireMap({ result }: MillionaireMapProps) {
       </svg>
 
       {!result && (
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-          <div className="rounded-[26px] border border-white/70 bg-white/70 shadow-[0_25px_90px_rgba(15,23,42,0.14)] backdrop-blur-xl px-7 py-6 text-center max-w-[560px]">
-            <div className="mx-auto w-20 h-20 rounded-full bg-white/85 border border-gray-200 flex items-center justify-center shadow-sm text-5xl">
+        <div className="absolute inset-x-0 top-0 bottom-[180px] sm:bottom-[80px] flex items-center justify-center pointer-events-none px-4">
+          <div className="rounded-[26px] border border-white/70 bg-white/70 shadow-[0_25px_90px_rgba(15,23,42,0.14)] backdrop-blur-xl px-5 sm:px-7 py-5 sm:py-6 text-center max-w-[480px] w-full">
+            <div className="mx-auto w-14 h-14 sm:w-20 sm:h-20 rounded-full bg-white/85 border border-gray-200 flex items-center justify-center shadow-sm text-3xl sm:text-5xl">
               🤑
             </div>
-            <div className="mt-5 font-extrabold tracking-tight text-gray-900 text-2xl sm:text-4xl leading-tight">
+            <div className="mt-3 sm:mt-5 font-extrabold tracking-tight text-gray-900 text-lg sm:text-4xl leading-tight">
               {t('map.emptyBefore')}{' '}
               <span className="text-emerald-600">{t('map.emptyHighlight')}</span>{' '}
               {t('map.emptyAfter')}
             </div>
-            <div className="mt-6 text-sm sm:text-base text-gray-500">
+            <div className="mt-3 sm:mt-6 text-xs sm:text-base text-gray-500 leading-relaxed">
               {t('map.emptySubtitle')}
             </div>
           </div>

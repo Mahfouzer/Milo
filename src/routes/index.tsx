@@ -115,7 +115,7 @@ function IndexComponent() {
                   </aside>
                 )}
 
-                {/* Map stage */} 
+                {/* Map stage */}
                 <section className="relative">
                   <div className="relative h-[72vh] lg:h-full">
                     <div className="absolute inset-0 p-3 sm:p-4">
@@ -125,9 +125,9 @@ function IndexComponent() {
                         </div>
                         <FallingMoneyOverlay show={showMoneyOverlay} onComplete={handleOverlayComplete} />
 
-                        {/* Floating input dock overlay (like reference) */} 
-                        <div className="absolute left-1/2 -translate-x-1/2 bottom-4 w-[min(860px,calc(100%-32px))] z-20 pointer-events-auto">
-                          <div className="rounded-[999px] border border-gray-200/70 bg-white/90 shadow-[0_18px_70px_rgba(15,23,42,0.18)] backdrop-blur-xl px-3 sm:px-4 py-3">
+                        {/* Floating input dock */}
+                        <div className="absolute left-1/2 -translate-x-1/2 bottom-3 sm:bottom-4 w-[calc(100%-24px)] sm:w-[min(860px,calc(100%-32px))] z-20 pointer-events-auto">
+                          <div className="rounded-[22px] sm:rounded-[999px] border border-gray-200/70 bg-white/90 shadow-[0_18px_70px_rgba(15,23,42,0.18)] backdrop-blur-xl px-3 sm:px-4 py-3">
                             <NetWorthInput
                               netWorth={netWorth}
                               setNetWorth={setNetWorth}
@@ -159,62 +159,44 @@ function IndexComponent() {
                       >
                         <div className="mx-auto w-full max-w-[1200px]">
                           <div className="rounded-[22px] border border-gray-200/60 bg-white/90 shadow-[0_25px_90px_rgba(15,23,42,0.22)] backdrop-blur-xl overflow-hidden">
-                            <button
-                              type="button"
-                              className="w-full px-4 pt-3 pb-2 flex items-center justify-between"
-                              onClick={() => {
-                                setSheetSnap((prev) => (prev === 'collapsed' ? 'half' : 'collapsed'))
-                              }}
-                              aria-label="Toggle results sheet"
-                            >
-                              <div className="flex items-center gap-2">
-                                <div className="h-1.5 w-10 rounded-full bg-gray-300" aria-hidden="true" />
-                                <span className="text-sm font-semibold text-gray-800">{t('results.sheet.title')}</span>
+                            <div className="w-full px-4 pt-3 pb-2 flex items-center justify-between">
+                              <span className="text-sm font-semibold text-gray-800">{t('results.sheet.title')}</span>
+
+                              {/* Snap icon controls */}
+                              <div className="flex items-center gap-1">
+                                <button
+                                  type="button"
+                                  onClick={() => setSheetSnap('collapsed')}
+                                  className={`p-1.5 rounded-lg transition-colors ${sheetSnap === 'collapsed' ? 'bg-gray-900 text-white' : 'text-gray-500 hover:bg-gray-100'}`}
+                                  aria-label={t('results.sheet.snapMin')}
+                                >
+                                  <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M19.5 18.5h-15" /></svg>
+                                </button>
+                                <button
+                                  type="button"
+                                  onClick={() => setSheetSnap('half')}
+                                  className={`p-1.5 rounded-lg transition-colors ${sheetSnap === 'half' ? 'bg-gray-900 text-white' : 'text-gray-500 hover:bg-gray-100'}`}
+                                  aria-label={t('results.sheet.snapHalf')}
+                                >
+                                  <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M3.75 12h16.5M3.75 18h16.5" /></svg>
+                                </button>
+                                <button
+                                  type="button"
+                                  onClick={() => setSheetSnap('expanded')}
+                                  className={`p-1.5 rounded-lg transition-colors ${sheetSnap === 'expanded' ? 'bg-gray-900 text-white' : 'text-gray-500 hover:bg-gray-100'}`}
+                                  aria-label={t('results.sheet.snapFull')}
+                                >
+                                  <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6h16.5M3.75 12h16.5M3.75 18h16.5" /></svg>
+                                </button>
                               </div>
+
                               <span className="text-xs font-semibold text-gray-600">
                                 {t('results.sheet.millionaireLabel', { count: result.millionaireCount })}
                               </span>
-                            </button>
-
-                            {/* Snap controls (scaffold) */} 
-                            <div className="px-4 pb-3 flex gap-2">
-                              <button
-                                type="button"
-                                onClick={() => setSheetSnap('collapsed')}
-                                className={`px-3 py-1.5 rounded-full text-xs font-semibold border transition-colors ${
-                                  sheetSnap === 'collapsed'
-                                    ? 'bg-gray-900 text-white border-gray-900'
-                                    : 'bg-white text-gray-700 border-gray-200 hover:bg-gray-50'
-                                }`}
-                              >
-                                {t('results.sheet.snapMin')}
-                              </button>
-                              <button
-                                type="button"
-                                onClick={() => setSheetSnap('half')}
-                                className={`px-3 py-1.5 rounded-full text-xs font-semibold border transition-colors ${
-                                  sheetSnap === 'half'
-                                    ? 'bg-gray-900 text-white border-gray-900'
-                                    : 'bg-white text-gray-700 border-gray-200 hover:bg-gray-50'
-                                }`}
-                              >
-                                {t('results.sheet.snapHalf')}
-                              </button>
-                              <button
-                                type="button"
-                                onClick={() => setSheetSnap('expanded')}
-                                className={`px-3 py-1.5 rounded-full text-xs font-semibold border transition-colors ${
-                                  sheetSnap === 'expanded'
-                                    ? 'bg-gray-900 text-white border-gray-900'
-                                    : 'bg-white text-gray-700 border-gray-200 hover:bg-gray-50'
-                                }`}
-                              >
-                                {t('results.sheet.snapFull')}
-                              </button>
                             </div>
 
                             <div className="border-t border-gray-200/60">
-                              <div className="max-h-[60vh] overflow-y-auto p-3">
+                              <div className="h-[60vh] overflow-y-auto overscroll-contain p-3">
                                 <CountryList result={result} />
                               </div>
                             </div>
