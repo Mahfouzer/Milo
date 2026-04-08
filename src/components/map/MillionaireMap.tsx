@@ -219,9 +219,7 @@ export function MillionaireMap({ result }: MillionaireMapProps) {
           zIndex: 0
         }}
       >
-        <desc id="map-description">
-          Interactive world map showing countries where you are a millionaire. Green indicates millionaire status, gray indicates almost millionaire.
-        </desc>
+        <desc id="map-description">{t('map.description')}</desc>
         <defs>
           <filter id="glow">
             <feGaussianBlur stdDeviation="3" result="coloredBlur" />
@@ -240,11 +238,12 @@ export function MillionaireMap({ result }: MillionaireMapProps) {
               🤑
             </div>
             <div className="mt-5 font-extrabold tracking-tight text-gray-900 text-2xl sm:text-4xl leading-tight">
-               How many countries are you{' '}
-              <span className="text-emerald-600">millionaire</span> at?
+              {t('map.emptyBefore')}{' '}
+              <span className="text-emerald-600">{t('map.emptyHighlight')}</span>{' '}
+              {t('map.emptyAfter')}
             </div>
             <div className="mt-6 text-sm sm:text-base text-gray-500">
-              Enter your net worth below 👇 to reveal your map 💸
+              {t('map.emptySubtitle')}
             </div>
           </div>
         </div>

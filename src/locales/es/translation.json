@@ -6,7 +6,8 @@
     "placeholder": "Ingresa tu patrimonio neto",
     "currency": "Moneda",
     "calculate": "Calcular",
-    "calculating": "Calculando..."
+    "calculating": "Calculando...",
+    "go": "Ir"
   },
   "header": {
     "countries": "países"
@@ -18,6 +19,14 @@
     "amount": "Cantidad",
     "searchPlaceholder": "Buscar países...",
     "noResults": "No se encontraron países",
+    "clearSearch": "Limpiar búsqueda",
+    "sheet": {
+      "title": "Resultados",
+      "millionaireLabel": "{{count}} millonario",
+      "snapMin": "Mín",
+      "snapHalf": "Mitad",
+      "snapFull": "Completo"
+    },
     "status": {
       "millionaire": "Millonario",
       "almost": "Casi",
@@ -25,7 +34,12 @@
     }
   },
   "map": {
-    "hover": "Pasa el mouse para ver detalles"
+    "hover": "Pasa el mouse para ver detalles",
+    "description": "Mapa mundial interactivo que muestra los países donde eres millonario",
+    "emptyBefore": "🗺️ ¿En cuántos países eres",
+    "emptyHighlight": "millonario",
+    "emptyAfter": "🧐?",
+    "emptySubtitle": "Ingresa tu patrimonio abajo 👇 para revelar tu mapa 💸"
   },
   "share": {
     "title": "Comparte tus resultados",
@@ -37,6 +51,7 @@
   "footer": {
     "about": "Acerca de",
     "dataSource": "Fuente de Datos",
+    "linkedin": "LinkedIn",
     "buyCoffee": "Cómprame un café",
     "creator": "Creado por @mahfouzer"
   },

@@ -1,4 +1,7 @@
+import { useTranslation } from 'react-i18next'
+
 export function Footer() {
+  const { t } = useTranslation()
   return (
     <footer className="bg-transparent px-4 py-3">
       <div className="flex items-center justify-between gap-4 text-xs sm:text-sm text-gray-600">
@@ -7,18 +10,18 @@ export function Footer() {
           target="_blank"
           rel="noopener noreferrer"
           className="hover:text-gray-900 transition-colors font-semibold"
-          aria-label="LinkedIn"
+          aria-label={t('footer.linkedin')}
         >
-          LinkedIn
+          {t('footer.linkedin')}
         </a>
         <a
           href="https://www.buymeacoffee.com/mahfouzer"
           target="_blank"
           rel="noopener noreferrer"
           className="hover:text-gray-900 transition-colors font-semibold"
-          aria-label="Buy me a coffee"
+          aria-label={t('footer.buyCoffee')}
         >
-          Buy me a coffee
+          {t('footer.buyCoffee')}
         </a>
       </div>
     </footer>

@@ -187,8 +187,8 @@ export function NetWorthInput({
                   disabled={loading || !netWorth || isNaN(parseFloat(netWorth))}
                   className="bg-primary-500 hover:bg-primary-600 disabled:bg-gray-300 disabled:cursor-not-allowed text-white font-semibold py-2 sm:py-2.5 px-4 sm:px-8 rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 whitespace-nowrap shadow-sm hover:shadow-md text-sm sm:text-base"
                 >
-                  <span className="hidden sm:inline">{loading ? t('input.calculating', { defaultValue: 'Calculating...' }) : t('input.calculate', { defaultValue: 'Calculate' })}</span>
-                  <span className="sm:hidden">{loading ? '...' : 'Go'}</span>
+                  <span className="hidden sm:inline">{loading ? t('input.calculating') : t('input.calculate')}</span>
+                  <span className="sm:hidden">{loading ? '...' : t('input.go')}</span>
                 </button>
               </div>
             )}

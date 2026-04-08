@@ -6,7 +6,8 @@
     "placeholder": "أدخل صافي ثروتك",
     "currency": "العملة",
     "calculate": "احسب",
-    "calculating": "جاري الحساب..."
+    "calculating": "جاري الحساب...",
+    "go": "انطلق"
   },
   "header": {
     "countries": "دول"
@@ -18,6 +19,14 @@
     "amount": "المبلغ",
     "searchPlaceholder": "البحث عن الدول...",
     "noResults": "لم يتم العثور على دول",
+    "clearSearch": "مسح البحث",
+    "sheet": {
+      "title": "النتائج",
+      "millionaireLabel": "{{count}} مليونير",
+      "snapMin": "أدنى",
+      "snapHalf": "نصف",
+      "snapFull": "كامل"
+    },
     "status": {
       "millionaire": "مليونير",
       "almost": "تقريباً",
@@ -25,7 +34,12 @@
     }
   },
   "map": {
-    "hover": "مرر الماوس لرؤية التفاصيل"
+    "hover": "مرر الماوس لرؤية التفاصيل",
+    "description": "خريطة العالم التفاعلية تُظهر الدول التي أنت مليونير فيها",
+    "emptyBefore": "🗺️ في كم دولة أنت",
+    "emptyHighlight": "مليونير",
+    "emptyAfter": "🧐؟",
+    "emptySubtitle": "أدخل صافي ثروتك أدناه 👇 لاكتشاف خريطتك 💸"
   },
   "share": {
     "title": "شارك نتائجك",
@@ -37,6 +51,7 @@
   "footer": {
     "about": "حول",
     "dataSource": "مصدر البيانات",
+    "linkedin": "لينكد إن",
     "buyCoffee": "اشتري لي قهوة",
     "creator": "صُنع بواسطة @mahfouzer"
   },

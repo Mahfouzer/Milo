@@ -1,6 +1,7 @@
 import { createRoute } from '@tanstack/react-router'
 import { Route as RootRoute } from './__root'
 import { useEffect, useRef, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useMillionaireCalculator } from '@/hooks/useMillionaireCalculator'
 import { NetWorthInput } from '@/components/input/NetWorthInput'
 import { MillionaireMap } from '@/components/map/MillionaireMap'
@@ -18,6 +19,7 @@ export const Route = createRoute({
 type SheetSnap = 'collapsed' | 'half' | 'expanded'
 
 function IndexComponent() {
+  const { t } = useTranslation()
   const {
     netWorth,
     setNetWorth,
@@ -167,10 +169,10 @@ function IndexComponent() {
                             >
                               <div className="flex items-center gap-2">
                                 <div className="h-1.5 w-10 rounded-full bg-gray-300" aria-hidden="true" />
-                                <span className="text-sm font-semibold text-gray-800">Results</span>
+                                <span className="text-sm font-semibold text-gray-800">{t('results.sheet.title')}</span>
                               </div>
                               <span className="text-xs font-semibold text-gray-600">
-                                {result.millionaireCount} millionaire
+                                {t('results.sheet.millionaireLabel', { count: result.millionaireCount })}
                               </span>
                             </button>
 
@@ -185,7 +187,7 @@ function IndexComponent() {
                                     : 'bg-white text-gray-700 border-gray-200 hover:bg-gray-50'
                                 }`}
                               >
-                                Min
+                                {t('results.sheet.snapMin')}
                               </button>
                               <button
                                 type="button"
@@ -196,7 +198,7 @@ function IndexComponent() {
                                     : 'bg-white text-gray-700 border-gray-200 hover:bg-gray-50'
                                 }`}
                               >
-                                Half
+                                {t('results.sheet.snapHalf')}
                               </button>
                               <button
                                 type="button"
@@ -207,7 +209,7 @@ function IndexComponent() {
                                     : 'bg-white text-gray-700 border-gray-200 hover:bg-gray-50'
                                 }`}
                               >
-                                Full
+                                {t('results.sheet.snapFull')}
                               </button>
                             </div>
 

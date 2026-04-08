@@ -6,7 +6,8 @@
     "placeholder": "Enter your net worth",
     "currency": "Currency",
     "calculate": "Calculate",
-    "calculating": "Calculating..."
+    "calculating": "Calculating...",
+    "go": "Go"
   },
   "header": {
     "countries": "countries"
@@ -18,6 +19,14 @@
     "amount": "Amount",
     "searchPlaceholder": "Search countries...",
     "noResults": "No countries found",
+    "clearSearch": "Clear search",
+    "sheet": {
+      "title": "Results",
+      "millionaireLabel": "{{count}} millionaire",
+      "snapMin": "Min",
+      "snapHalf": "Half",
+      "snapFull": "Full"
+    },
     "status": {
       "millionaire": "Millionaire",
       "almost": "Almost",
@@ -25,7 +34,12 @@
     }
   },
   "map": {
-    "hover": "Hover to see details"
+    "hover": "Hover to see details",
+    "description": "Interactive world map showing countries where you are a millionaire",
+    "emptyBefore": "🗺️ How many countries are you",
+    "emptyHighlight": "millionaire",
+    "emptyAfter": "🧐 at?",
+    "emptySubtitle": "Enter your net worth below 👇 to reveal your map 💸"
   },
   "share": {
     "title": "Share your results",
@@ -37,6 +51,7 @@
   "footer": {
     "about": "About",
     "dataSource": "Data Source",
+    "linkedin": "LinkedIn",
     "buyCoffee": "Buy me a coffee",
     "creator": "Created by @mahfouzer"
   },
