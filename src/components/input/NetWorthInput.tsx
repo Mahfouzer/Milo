@@ -81,7 +81,7 @@ export function NetWorthInput({
             </div>
 
             {/* Currency segment */}
-            <div className="h-11 rounded-full bg-white/80 border border-gray-200/70 shadow-sm flex items-center px-3">
+            <div className="h-11 rounded-full bg-white/80 border border-gray-200/70 shadow-sm flex items-center px-3 relative">
               <label htmlFor="currency" className="sr-only">
                 {t('input.currency')}
               </label>
@@ -89,7 +89,7 @@ export function NetWorthInput({
                 id="currency"
                 value={currency}
                 onChange={(e) => setCurrency(e.target.value)}
-                className="appearance-none bg-transparent outline-none border-none text-sm font-semibold text-gray-800 pr-7"
+                className="appearance-none bg-transparent outline-none border-none text-sm font-semibold text-gray-800 pe-7"
                 aria-label={t('input.currency')}
               >
                 {Object.entries(currencies).map(([code, info]) => (
@@ -98,7 +98,13 @@ export function NetWorthInput({
                   </option>
                 ))}
               </select>
-              <svg className="w-4 h-4 text-gray-500 -ml-5 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <svg
+                className="absolute end-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500 pointer-events-none"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
               </svg>
             </div>
