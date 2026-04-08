@@ -67,7 +67,7 @@ export function NetWorthInput({
                   value={netWorth}
                   onChange={handleInputChange}
                   placeholder={t('input.label')}
-                  className="flex-1 bg-transparent outline-none border-none text-sm font-semibold text-gray-900 placeholder:text-gray-400"
+                  className="flex-1 bg-transparent outline-none border-none text-base font-semibold text-gray-900 placeholder:text-gray-400"
                   aria-required="true"
                   autoComplete="off"
                 />
@@ -80,7 +80,7 @@ export function NetWorthInput({
                   id="currency-mobile"
                   value={currency}
                   onChange={(e) => setCurrency(e.target.value)}
-                  className="w-full h-full appearance-none bg-transparent outline-none border-none text-sm font-semibold text-gray-800 px-4 pe-10"
+                  className="w-full h-full appearance-none bg-transparent outline-none border-none text-base font-semibold text-gray-800 px-4 pe-10"
                   aria-label={t('input.currency')}
                 >
                   {Object.entries(currencies).map(([code, info]) => (

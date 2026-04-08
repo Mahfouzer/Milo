@@ -128,7 +128,7 @@ export function CountryList({ result }: CountryListProps) {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder={t('results.searchPlaceholder', { defaultValue: 'Search countries...' })}
-            className="w-full px-4 py-2.5 pl-10 border border-gray-200 rounded-2xl bg-white/80 shadow-[0_8px_30px_rgba(15,23,42,0.06)] focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors text-sm"
+            className="w-full px-4 py-2.5 pl-10 border border-gray-200 rounded-2xl bg-white/80 shadow-[0_8px_30px_rgba(15,23,42,0.06)] focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors text-base sm:text-sm"
             aria-label={t('results.searchPlaceholder', { defaultValue: 'Search countries' })}
           />
           <svg
