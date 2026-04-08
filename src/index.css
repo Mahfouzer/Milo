@@ -1,0 +1,32 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    @apply h-full;
+  }
+  
+  body {
+    @apply h-full m-0 font-sans antialiased;
+  }
+  
+  #root {
+    @apply h-full;
+  }
+}
+
+@layer utilities {
+  .rtl {
+    direction: rtl;
+  }
+  
+  .ltr {
+    direction: ltr;
+  }
+
+  .glass-card {
+    @apply border border-white/70 bg-white/80 backdrop-blur-xl;
+  }
+}
+

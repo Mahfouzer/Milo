@@ -1,0 +1,54 @@
+{
+  "title": "¿En Cuántos Países Eres Millonario?",
+  "subtitle": "Ingresa tu patrimonio neto para ver en cuántos países eres millonario",
+  "input": {
+    "label": "Patrimonio Neto",
+    "placeholder": "Ingresa tu patrimonio neto",
+    "currency": "Moneda",
+    "calculate": "Calcular",
+    "calculating": "Calculando..."
+  },
+  "header": {
+    "countries": "países"
+  },
+  "results": {
+    "title": "Eres millonario en {{count}} países",
+    "almostTitle": "Casi millonario",
+    "country": "País",
+    "amount": "Cantidad",
+    "searchPlaceholder": "Buscar países...",
+    "noResults": "No se encontraron países",
+    "status": {
+      "millionaire": "Millonario",
+      "almost": "Casi",
+      "not": "No es millonario"
+    }
+  },
+  "map": {
+    "hover": "Pasa el mouse para ver detalles"
+  },
+  "share": {
+    "title": "Comparte tus resultados",
+    "facebook": "Compartir en Facebook",
+    "linkedin": "Compartir en LinkedIn",
+    "whatsapp": "Compartir en WhatsApp",
+    "download": "Descargar imagen"
+  },
+  "footer": {
+    "about": "Acerca de",
+    "dataSource": "Fuente de Datos",
+    "buyCoffee": "Cómprame un café",
+    "creator": "Creado por @mahfouzer"
+  },
+  "loading": "Cargando...",
+  "error": {
+    "apiLimit": "Hemos alcanzado el límite de API. Estos datos pueden estar desactualizados.",
+    "generic": "Ocurrió un error. Por favor, inténtalo de nuevo."
+  },
+  "languages": {
+    "en": "English",
+    "ar": "العربية",
+    "es": "Español"
+  }
+}
+

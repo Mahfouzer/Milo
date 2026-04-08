@@ -1,0 +1,54 @@
+{
+  "title": "في كم دولة أنت مليونير؟",
+  "subtitle": "أدخل صافي ثروتك لمعرفة عدد الدول التي أنت مليونير فيها",
+  "input": {
+    "label": "صافي الثروة",
+    "placeholder": "أدخل صافي ثروتك",
+    "currency": "العملة",
+    "calculate": "احسب",
+    "calculating": "جاري الحساب..."
+  },
+  "header": {
+    "countries": "دول"
+  },
+  "results": {
+    "title": "أنت مليونير في {{count}} دولة",
+    "almostTitle": "تقريباً مليونير",
+    "country": "الدولة",
+    "amount": "المبلغ",
+    "searchPlaceholder": "البحث عن الدول...",
+    "noResults": "لم يتم العثور على دول",
+    "status": {
+      "millionaire": "مليونير",
+      "almost": "تقريباً",
+      "not": "ليس مليونير"
+    }
+  },
+  "map": {
+    "hover": "مرر الماوس لرؤية التفاصيل"
+  },
+  "share": {
+    "title": "شارك نتائجك",
+    "facebook": "شارك على فيسبوك",
+    "linkedin": "شارك على لينكد إن",
+    "whatsapp": "شارك على واتساب",
+    "download": "تحميل الصورة"
+  },
+  "footer": {
+    "about": "حول",
+    "dataSource": "مصدر البيانات",
+    "buyCoffee": "اشتري لي قهوة",
+    "creator": "صُنع بواسطة @mahfouzer"
+  },
+  "loading": "جاري التحميل...",
+  "error": {
+    "apiLimit": "وصلنا إلى حد API. قد تكون هذه البيانات قديمة.",
+    "generic": "حدث خطأ. يرجى المحاولة مرة أخرى."
+  },
+  "languages": {
+    "en": "English",
+    "ar": "العربية",
+    "es": "Español"
+  }
+}
+

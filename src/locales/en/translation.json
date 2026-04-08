@@ -1,0 +1,54 @@
+{
+  "title": "How Many Countries Are You a Millionaire In?",
+  "subtitle": "Enter your net worth to see how many countries you're a millionaire in",
+  "input": {
+    "label": "Net Worth",
+    "placeholder": "Enter your net worth",
+    "currency": "Currency",
+    "calculate": "Calculate",
+    "calculating": "Calculating..."
+  },
+  "header": {
+    "countries": "countries"
+  },
+  "results": {
+    "title": "You're a millionaire in {{count}} countries",
+    "almostTitle": "Almost a millionaire",
+    "country": "Country",
+    "amount": "Amount",
+    "searchPlaceholder": "Search countries...",
+    "noResults": "No countries found",
+    "status": {
+      "millionaire": "Millionaire",
+      "almost": "Almost",
+      "not": "Not a millionaire"
+    }
+  },
+  "map": {
+    "hover": "Hover to see details"
+  },
+  "share": {
+    "title": "Share your results",
+    "facebook": "Share on Facebook",
+    "linkedin": "Share on LinkedIn",
+    "whatsapp": "Share on WhatsApp",
+    "download": "Download image"
+  },
+  "footer": {
+    "about": "About",
+    "dataSource": "Data Source",
+    "buyCoffee": "Buy me a coffee",
+    "creator": "Created by @mahfouzer"
+  },
+  "loading": "Loading...",
+  "error": {
+    "apiLimit": "We've hit an API limit. This data may be stale.",
+    "generic": "An error occurred. Please try again."
+  },
+  "languages": {
+    "en": "English",
+    "ar": "العربية",
+    "es": "Español"
+  }
+}
+
