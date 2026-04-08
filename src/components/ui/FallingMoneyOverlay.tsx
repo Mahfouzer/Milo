@@ -1,143 +1,119 @@
-import { useEffect, useState, useRef, useMemo } from 'react'
-import { gsap } from 'gsap'
+import { useEffect, useState, useCallback } from 'react'
+import { createPortal } from 'react-dom'
 
 interface FallingMoneyOverlayProps {
   show: boolean
   onComplete: () => void
 }
 
-interface MoneyItem {
-  id: number
-  emoji: string
-  left: number
-  delay: number
-  duration: number
-  size: number
-  rotation: number
-  swingAmount: number
-}
+const EMOJIS = ['💵', '💰', '💸', '💴', '💶', '💷', '🤑', '💲']
 
-const MONEY_EMOJIS = ['💵', '💰', '💸', '💴', '💶', '💷', '🤑', '💲']
-
-function generateMoneyItems(count: number): MoneyItem[] {
-  return Array.from({ length: count }, (_, i) => ({
-    id: i,
-    emoji: MONEY_EMOJIS[Math.floor(Math.random() * MONEY_EMOJIS.length)],
-    left: Math.random() * 100,
-    delay: Math.random() * 1.2,
-    duration: 1.5 + Math.random() * 1.5,
-    size: 20 + Math.random() * 30,
-    rotation: Math.random() * 360,
-    swingAmount: 15 + Math.random() * 30,
-  }))
+function randomBetween(min: number, max: number) {
+  return min + Math.random() * (max - min)
 }
 
 export function FallingMoneyOverlay({ show, onComplete }: FallingMoneyOverlayProps) {
-  const [isVisible, setIsVisible] = useState(false)
-  const containerRef = useRef<HTMLDivElement>(null)
-  const onCompleteRef = useRef(onComplete)
-  onCompleteRef.current = onComplete
+  const [visible, setVisible] = useState(false)
+  const [fading, setFading] = useState(false)
 
-  // Generate items once per show
-  const moneyItems = useMemo(() => (show ? generateMoneyItems(40) : []), [show])
+  const handleEnd = useCallback(() => {
+    setFading(true)
+    setTimeout(() => {
+      setVisible(false)
+      setFading(false)
+      onComplete()
+    }, 500)
+  }, [onComplete])
 
   useEffect(() => {
-    if (show) {
-      setIsVisible(true)
-      // Animate in
-      if (containerRef.current) {
-        gsap.fromTo(
-          containerRef.current,
-          { opacity: 0 },
-          { opacity: 1, duration: 0.3, ease: 'power2.out' }
-        )
-      }
+    if (!show) return
+    setVisible(true)
+    setFading(false)
+    const timer = setTimeout(handleEnd, 3000)
+    return () => clearTimeout(timer)
+  }, [show, handleEnd])
 
-      // Hide after 2.5 seconds
-      const timer = setTimeout(() => {
-        if (containerRef.current) {
-          gsap.to(containerRef.current, {
-            opacity: 0,
-            duration: 0.5,
-            ease: 'power2.in',
-            onComplete: () => {
-              setIsVisible(false)
-              onCompleteRef.current()
-            },
-          })
-        } else {
-          setIsVisible(false)
-          onCompleteRef.current()
-        }
-      }, 2500)
+  if (!visible) return null
 
-      return () => clearTimeout(timer)
-    } else {
-      setIsVisible(false)
-    }
-  }, [show])
+  const items = Array.from({ length: 50 }, (_, i) => ({
+    id: i,
+    emoji: EMOJIS[i % EMOJIS.length],
+    left: randomBetween(0, 100),
+    delay: randomBetween(0, 1.5),
+    duration: randomBetween(2, 3.5),
+    size: randomBetween(22, 42),
+    swing: randomBetween(-40, 40),
+  }))
 
-  if (!isVisible) return null
-
-  return (
+  return createPortal(
     <div
-      ref={containerRef}
-      className="absolute inset-0 z-[100] overflow-hidden pointer-events-none"
-      style={{ opacity: 0 }}
+      style={{
+        position: 'fixed',
+        inset: 0,
+        zIndex: 9999,
+        pointerEvents: 'none',
+        overflow: 'hidden',
+        opacity: fading ? 0 : 1,
+        transition: 'opacity 500ms ease',
+      }}
     >
-      {/* Semi-transparent backdrop */}
-      <div className="absolute inset-0 bg-black/40" />
+      <div
+        style={{
+          position: 'absolute',
+          inset: 0,
+          background: 'rgba(0,0,0,0.35)',
+        }}
+      />
 
-      {/* Center text */}
-      <div className="absolute inset-0 flex items-center justify-center">
-        <div className="text-4xl font-extrabold text-white drop-shadow-lg animate-bounce">
+      <div
+        style={{
+          position: 'absolute',
+          inset: 0,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
+        <div
+          style={{
+            fontSize: '2rem',
+            fontWeight: 900,
+            color: 'white',
+            textShadow: '0 4px 20px rgba(0,0,0,0.4)',
+            animation: 'money-bounce 0.6s ease infinite alternate',
+          }}
+        >
           🤑 Ka-ching! 🤑
         </div>
       </div>
 
-      {/* Falling money emojis */}
-      {moneyItems.map((item) => (
-        <span
+      {items.map((item) => (
+        <div
           key={item.id}
-          className="absolute pointer-events-none select-none"
           style={{
+            position: 'absolute',
             left: `${item.left}%`,
-            top: '-10%',
+            top: '-50px',
             fontSize: `${item.size}px`,
-            animation: `money-fall ${item.duration}s ${item.delay}s ease-in forwards, money-swing ${item.duration * 0.5}s ${item.delay}s ease-in-out infinite alternate`,
-            transform: `rotate(${item.rotation}deg)`,
-            '--swing-amount': `${item.swingAmount}px`,
+            animation: `money-drop ${item.duration}s ${item.delay}s linear forwards`,
+            '--swing': `${item.swing}px`,
           } as React.CSSProperties}
-          aria-hidden="true"
         >
           {item.emoji}
-        </span>
+        </div>
       ))}
 
-      {/* CSS animations */}
       <style>{`
-        @keyframes money-fall {
-          0% {
-            top: -10%;
-            opacity: 1;
-          }
-          85% {
-            opacity: 1;
-          }
-          100% {
-            top: 110%;
-            opacity: 0;
-          }
+        @keyframes money-drop {
+          0% { top: -50px; opacity: 1; transform: translateX(0) rotate(0deg); }
+          100% { top: 110vh; opacity: 0.6; transform: translateX(var(--swing, 0px)) rotate(360deg); }
         }
-        @keyframes money-swing {
-          0% {
-            transform: translateX(calc(-1 * var(--swing-amount, 20px))) rotate(0deg);
-          }
-          100% {
-            transform: translateX(var(--swing-amount, 20px)) rotate(15deg);
-          }
+        @keyframes money-bounce {
+          0% { transform: scale(1) translateY(0); }
+          100% { transform: scale(1.08) translateY(-8px); }
         }
       `}</style>
-    </div>
+    </div>,
+    document.body
   )
 }

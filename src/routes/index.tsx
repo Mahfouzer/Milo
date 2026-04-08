@@ -35,17 +35,15 @@ function IndexComponent() {
   const [desktopResultsOpen, setDesktopResultsOpen] = useState(true)
   const [sheetSnap, setSheetSnap] = useState<SheetSnap>('collapsed')
   const [showMoneyOverlay, setShowMoneyOverlay] = useState(false)
-  const previousLoadingRef = useRef(loading)
-  const hasShownOverlayRef = useRef(false)
+  const hasShownRef = useRef(false)
 
-  // Show overlay when loading completes
+  // Show overlay on the first calculation
   useEffect(() => {
-    if (previousLoadingRef.current && !loading && result && !hasShownOverlayRef.current) {
+    if (result && !hasShownRef.current) {
+      hasShownRef.current = true
       setShowMoneyOverlay(true)
-      hasShownOverlayRef.current = true
     }
-    previousLoadingRef.current = loading
-  }, [loading, result])
+  }, [result])
 
   // On results: open desktop panel; open mobile sheet to half
   useEffect(() => {
