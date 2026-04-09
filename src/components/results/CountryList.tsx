@@ -4,6 +4,7 @@ import { gsap } from 'gsap'
 import type { MillionaireCalculation } from '@/types'
 import currenciesData from '@/data/currencies.json'
 import { getFlagEmoji } from '@/lib/utils/flag-emoji'
+import { ShareButtons } from '@/components/share/ShareButtons'
 
 const currencies = currenciesData as Record<string, { symbol: string; name: string }>
 
@@ -141,7 +142,11 @@ export function CountryList({ result }: CountryListProps) {
             }
           }
         `}</style>
-        
+
+        <div className="mb-3">
+          <ShareButtons result={result} />
+        </div>
+
         {/* Search input */}
         <div className="relative">
           <input

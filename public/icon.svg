@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-label="Millionair Millionair app icon">
+  <defs>
+    <radialGradient id="bg" cx="22%" cy="18%" r="92%">
+      <stop offset="0%" stop-color="#FBBF24"/>
+      <stop offset="45%" stop-color="#22C55E"/>
+      <stop offset="100%" stop-color="#3B82F6"/>
+    </radialGradient>
+    <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="rgba(255,255,255,0.78)"/>
+      <stop offset="100%" stop-color="rgba(255,255,255,0.35)"/>
+    </linearGradient>
+    <filter id="softShadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#0f172a" flood-opacity="0.22"/>
+    </filter>
+    <filter id="innerGlow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="8" result="blur"/>
+      <feComposite in="blur" in2="SourceAlpha" operator="out" result="inner"/>
+      <feColorMatrix in="inner" type="matrix"
+        values="0 0 0 0 1
+                0 0 0 0 1
+                0 0 0 0 1
+                0 0 0 0.32 0" />
+      <feComposite in="SourceGraphic" operator="over"/>
+    </filter>
+  </defs>
+
+  <rect width="512" height="512" rx="120" fill="url(#bg)"/>
+
+  <g filter="url(#softShadow)">
+    <rect x="56" y="70" width="400" height="372" rx="92" fill="url(#glass)" opacity="0.92"/>
+    <rect x="56.5" y="70.5" width="399" height="371" rx="91.5" fill="none" stroke="rgba(255,255,255,0.55)"/>
+  </g>
+
+  <g filter="url(#innerGlow)">
+    <path
+      d="M128 356V164h44l50 92 50-92h44v192h-46V252l-32 60h-32l-32-60v104h-46z"
+      fill="rgba(255,255,255,0.92)"/>
+    <path
+      d="M272 356V164h44l50 92 50-92h44v192h-46V252l-32 60h-32l-32-60v104h-46z"
+      fill="rgba(255,255,255,0.72)"/>
+  </g>
+
+  <g transform="translate(350 120)">
+    <circle cx="54" cy="54" r="46" fill="#FDE68A" opacity="0.98"/>
+    <circle cx="54" cy="54" r="46" fill="none" stroke="#D97706" stroke-opacity="0.45" stroke-width="6"/>
+    <path d="M54 28c-11 0-20 7-20 16 0 10 9 14 20 16 12 2 16 5 16 10 0 4-5 8-16 8-7 0-13-2-18-6"
+      fill="none" stroke="#92400E" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M54 22v12M54 86v12" fill="none" stroke="#92400E" stroke-width="8" stroke-linecap="round"/>
+  </g>
+</svg>
+

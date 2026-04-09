@@ -1,0 +1,19 @@
+{
+  "name": "Millionair Millionair",
+  "short_name": "Millionair",
+  "description": "Calculate how many countries you're a millionaire in based on your net worth.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#f8fafc",
+  "theme_color": "#22c55e",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
+
