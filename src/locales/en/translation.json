@@ -29,6 +29,8 @@
     },
     "status": {
       "millionaire": "Millionaire",
+      "billionaire": "Billionaire",
+      "trillionaire": "Trillionaire",
       "almost": "Almost",
       "not": "Not a millionaire"
     }

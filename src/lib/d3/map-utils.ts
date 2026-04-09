@@ -7,6 +7,8 @@ export interface MapCountry {
   name: string
   isMillionaire: boolean
   isAlmost: boolean
+  isBillionaire: boolean
+  isTrillionaire: boolean
   localAmount: number
   currency: string
 }
@@ -47,13 +49,19 @@ export function prepareMapData(
 ): Map<string, MapCountry> {
   const map = new Map<string, MapCountry>()
   const almostCodes = new Set(almostMillionaire.map((r) => r.country.code))
+  const BILLION = 1_000_000_000
+  const TRILLION = 1_000_000_000_000
 
   results.forEach((result) => {
+    const isTrillionaire = result.localAmount >= TRILLION
+    const isBillionaire = !isTrillionaire && result.localAmount >= BILLION
     map.set(result.country.code, {
       code: result.country.code,
       name: result.country.name,
       isMillionaire: result.isMillionaire,
       isAlmost: almostCodes.has(result.country.code),
+      isBillionaire,
+      isTrillionaire,
       localAmount: result.localAmount,
       currency: result.country.currency,
     })

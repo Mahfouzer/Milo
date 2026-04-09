@@ -263,7 +263,11 @@ export function MillionaireMap({ result }: MillionaireMapProps) {
             {currencies[hoveredCountry.currency]?.symbol || hoveredCountry.currency}
           </div>
           <div className="text-[10px] sm:text-xs text-gray-600 mt-0.5 sm:mt-1">
-            {hoveredCountry.isMillionaire
+            {hoveredCountry.isTrillionaire
+              ? t('results.status.trillionaire')
+              : hoveredCountry.isBillionaire
+              ? t('results.status.billionaire')
+              : hoveredCountry.isMillionaire
               ? t('results.status.millionaire')
               : hoveredCountry.isAlmost
               ? t('results.status.almost')

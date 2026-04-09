@@ -71,6 +71,16 @@ export function CountryList({ result }: CountryListProps) {
     }).format(amount)
   }
 
+  const getStatusLabel = (localAmount: number, isAlmost: boolean, isMillionaire: boolean) => {
+    const TRILLION = 1_000_000_000_000
+    const BILLION = 1_000_000_000
+    if (localAmount >= TRILLION) return t('results.status.trillionaire')
+    if (localAmount >= BILLION) return t('results.status.billionaire')
+    if (isMillionaire) return t('results.status.millionaire')
+    if (isAlmost) return t('results.status.almost')
+    return t('results.status.not')
+  }
+
   return (
     <div
       className="flex flex-col h-full min-h-0"
@@ -216,11 +226,7 @@ export function CountryList({ result }: CountryListProps) {
                           : 'bg-gray-100 text-gray-700 border-gray-200'
                       }`}
                     >
-                      {isMillionaire
-                        ? t('results.status.millionaire')
-                        : isAlmost
-                        ? t('results.status.almost')
-                        : t('results.status.not')}
+                      {getStatusLabel(countryResult.localAmount, isAlmost, isMillionaire)}
                     </span>
                   </div>
                 </div>

@@ -29,6 +29,8 @@
     },
     "status": {
       "millionaire": "مليونير",
+      "billionaire": "ملياردير",
+      "trillionaire": "تريليونير",
       "almost": "تقريباً",
       "not": "ليس مليونير"
     }
