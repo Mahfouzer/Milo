@@ -1,9 +1,10 @@
 [build]
-  command   = "npm run build"
+  command   = "pnpm install --no-frozen-lockfile && pnpm run build"
   publish   = "dist"
 
 [build.environment]
   NODE_VERSION = "20"
+  PNPM_VERSION = "10.30.3"
 
 # SPA fallback — all routes serve index.html so TanStack Router handles them
 [[redirects]]
