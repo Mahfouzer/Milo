@@ -1,7 +1,6 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useRef } from 'react'
 import { calculateMillionaireStatus } from '@/features/calculator/calculator'
 import type { MillionaireCalculation } from '@/types'
-import { useDebounce } from './useDebounce'
 
 export function useMillionaireCalculator() {
   const [netWorth, setNetWorth] = useState<string>('')
@@ -11,7 +10,7 @@ export function useMillionaireCalculator() {
   const [result, setResult] = useState<MillionaireCalculation | null>(null)
   const [isStale, setIsStale] = useState(false)
 
-  const debouncedNetWorth = useDebounce(netWorth, 500)
+  const lastCalculatedRef = useRef<{ netWorth: string; currency: string } | null>(null)
 
   const performCalculation = useCallback((value: string, curr: string) => {
     const numericValue = parseFloat(value)
@@ -19,6 +18,8 @@ export function useMillionaireCalculator() {
     if (!value || isNaN(numericValue) || numericValue <= 0) {
       setResult(null)
       setLoading(false)
+      setIsStale(false)
+      lastCalculatedRef.current = null
       return
     }
 
@@ -29,6 +30,7 @@ export function useMillionaireCalculator() {
       .then((calculation) => {
         setResult(calculation)
         setIsStale(false)
+        lastCalculatedRef.current = { netWorth: value, currency: curr }
       })
       .catch((err) => {
         console.error('Calculation error:', err)
@@ -43,10 +45,13 @@ export function useMillionaireCalculator() {
       })
   }, [])
 
-  // Auto-calculate on debounced input change
+  // Mark results as stale if inputs change after a calculation
   useEffect(() => {
-    performCalculation(debouncedNetWorth, currency)
-  }, [debouncedNetWorth, currency, performCalculation])
+    const last = lastCalculatedRef.current
+    if (!last) return
+    const changed = last.netWorth !== netWorth || last.currency !== currency
+    setIsStale(changed)
+  }, [netWorth, currency])
 
   // Manual calculation trigger
   const calculate = useCallback(() => {

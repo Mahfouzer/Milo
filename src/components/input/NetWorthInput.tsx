@@ -1,3 +1,4 @@
+import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ProgressBar } from '@/components/ui/ProgressBar'
 import currenciesData from '@/data/currencies.json'
@@ -27,7 +28,7 @@ export function NetWorthInput({
   onCalculate,
   variant = 'default',
 }: NetWorthInputProps) {
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value
@@ -38,6 +39,40 @@ export function NetWorthInput({
   }
 
   const isDock = variant === 'dock'
+
+  const compactHint = useMemo(() => {
+    const n = parseFloat(netWorth)
+    if (!netWorth || isNaN(n) || n <= 0) return null
+
+    const lang = i18n.language || 'en'
+    const nf = new Intl.NumberFormat(lang, { maximumFractionDigits: 1 })
+
+    // units: thousand / million / billion
+    const units =
+      lang === 'ar'
+        ? [
+            { value: 1_000_000_000, label: 'مليار' },
+            { value: 1_000_000, label: 'مليون' },
+            { value: 1_000, label: 'ألف' },
+          ]
+        : lang === 'es'
+        ? [
+            { value: 1_000_000_000, label: 'mil millones' },
+            { value: 1_000_000, label: 'M' },
+            { value: 1_000, label: 'mil' },
+          ]
+        : [
+            { value: 1_000_000_000, label: 'B' },
+            { value: 1_000_000, label: 'M' },
+            { value: 1_000, label: 'K' },
+          ]
+
+    const unit = units.find((u) => n >= u.value)
+    if (!unit) return null
+
+    const v = n / unit.value
+    return `≈ ${nf.format(v)} ${unit.label}`
+  }, [netWorth, i18n.language])
 
   return (
     <div className="w-full">
@@ -72,6 +107,12 @@ export function NetWorthInput({
                   autoComplete="off"
                 />
               </div>
+
+              {compactHint && (
+                <div className="px-1 text-[12px] font-semibold text-gray-500">
+                  {compactHint}
+                </div>
+              )}
 
               {/* Currency selector */}
               <div className="h-12 rounded-2xl bg-white/80 border border-gray-200/70 shadow-sm relative flex items-center">
@@ -138,6 +179,12 @@ export function NetWorthInput({
                   autoComplete="off"
                 />
               </div>
+
+              {compactHint && (
+                <div className="hidden lg:block text-xs font-semibold text-gray-500">
+                  {compactHint}
+                </div>
+              )}
 
               {/* Currency segment */}
               <div className="h-11 rounded-full bg-white/80 border border-gray-200/70 shadow-sm flex items-center px-3 relative flex-shrink-0">
