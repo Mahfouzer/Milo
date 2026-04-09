@@ -1,4 +1,3 @@
-import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ProgressBar } from '@/components/ui/ProgressBar'
 import currenciesData from '@/data/currencies.json'
@@ -30,49 +29,43 @@ export function NetWorthInput({
 }: NetWorthInputProps) {
   const { t, i18n } = useTranslation()
 
+  const formatWhileTyping = (raw: string) => {
+    if (!raw) return ''
+    const lang = i18n.language || 'en'
+
+    const [intRaw, fracRaw] = raw.split('.')
+    const intDigits = (intRaw || '').replace(/\D/g, '')
+    const intNum = intDigits ? Number(intDigits) : 0
+
+    const formattedInt = intDigits
+      ? new Intl.NumberFormat(lang, { maximumFractionDigits: 0 }).format(intNum)
+      : ''
+
+    // Preserve fractional typing exactly as entered
+    if (raw.includes('.')) {
+      return `${formattedInt || '0'}.${fracRaw ?? ''}`
+    }
+    return formattedInt
+  }
+
+  const normalizeFromInput = (value: string) => {
+    // Strip grouping separators and keep only digits + single dot
+    const cleaned = value.replace(/[^\d.]/g, '')
+    const parts = cleaned.split('.')
+    const intPart = parts[0] ?? ''
+    const fracPart = parts.length > 1 ? parts.slice(1).join('') : ''
+    return parts.length > 1 ? `${intPart}.${fracPart}` : intPart
+  }
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value
-    // Allow numbers, decimal point, and empty string
-    if (value === '' || /^\d*\.?\d*$/.test(value)) {
-      setNetWorth(value)
+    const normalized = normalizeFromInput(e.target.value)
+    // Allow empty, or digits with optional fractional
+    if (normalized === '' || /^\d*\.?\d*$/.test(normalized)) {
+      setNetWorth(normalized)
     }
   }
 
   const isDock = variant === 'dock'
-
-  const compactHint = useMemo(() => {
-    const n = parseFloat(netWorth)
-    if (!netWorth || isNaN(n) || n <= 0) return null
-
-    const lang = i18n.language || 'en'
-    const nf = new Intl.NumberFormat(lang, { maximumFractionDigits: 1 })
-
-    // units: thousand / million / billion
-    const units =
-      lang === 'ar'
-        ? [
-            { value: 1_000_000_000, label: 'مليار' },
-            { value: 1_000_000, label: 'مليون' },
-            { value: 1_000, label: 'ألف' },
-          ]
-        : lang === 'es'
-        ? [
-            { value: 1_000_000_000, label: 'mil millones' },
-            { value: 1_000_000, label: 'M' },
-            { value: 1_000, label: 'mil' },
-          ]
-        : [
-            { value: 1_000_000_000, label: 'B' },
-            { value: 1_000_000, label: 'M' },
-            { value: 1_000, label: 'K' },
-          ]
-
-    const unit = units.find((u) => n >= u.value)
-    if (!unit) return null
-
-    const v = n / unit.value
-    return `≈ ${nf.format(v)} ${unit.label}`
-  }, [netWorth, i18n.language])
 
   return (
     <div className="w-full">
@@ -99,7 +92,7 @@ export function NetWorthInput({
                   id="net-worth-mobile"
                   type="text"
                   inputMode="decimal"
-                  value={netWorth}
+                  value={formatWhileTyping(netWorth)}
                   onChange={handleInputChange}
                   placeholder={t('input.label')}
                   className="flex-1 bg-transparent outline-none border-none text-base font-semibold text-gray-900 placeholder:text-gray-400"
@@ -107,12 +100,6 @@ export function NetWorthInput({
                   autoComplete="off"
                 />
               </div>
-
-              {compactHint && (
-                <div className="px-1 text-[12px] font-semibold text-gray-500">
-                  {compactHint}
-                </div>
-              )}
 
               {/* Currency selector */}
               <div className="h-12 rounded-2xl bg-white/80 border border-gray-200/70 shadow-sm relative flex items-center">
@@ -170,7 +157,7 @@ export function NetWorthInput({
                   id="net-worth"
                   type="text"
                   inputMode="decimal"
-                  value={netWorth}
+                  value={formatWhileTyping(netWorth)}
                   onChange={handleInputChange}
                   placeholder={t('input.label')}
                   className="w-full bg-transparent outline-none border-none text-sm font-semibold text-gray-900 placeholder:text-gray-400"
@@ -179,12 +166,6 @@ export function NetWorthInput({
                   autoComplete="off"
                 />
               </div>
-
-              {compactHint && (
-                <div className="hidden lg:block text-xs font-semibold text-gray-500">
-                  {compactHint}
-                </div>
-              )}
 
               {/* Currency segment */}
               <div className="h-11 rounded-full bg-white/80 border border-gray-200/70 shadow-sm flex items-center px-3 relative flex-shrink-0">
@@ -241,7 +222,7 @@ export function NetWorthInput({
                   id="net-worth"
                   type="text"
                   inputMode="decimal"
-                  value={netWorth}
+                  value={formatWhileTyping(netWorth)}
                   onChange={handleInputChange}
                   placeholder={t('input.placeholder')}
                   className="w-full pl-7 sm:pl-8 pr-3 py-2 sm:py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors text-sm sm:text-base bg-white/90"
